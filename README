@@ -1,0 +1,11 @@
+This program "fixes" T10-PI checksums by writing 0xff bytes in the appropriate places. It is licensed with the MIT license. Usage information is included in the massive comment at the top of fix_t10pi.c.
+
+Generally, you'll want to do something like this (assuming a sector size of 4096). If you're working with Type 2, you'll need to add cdbsz=32 for each ddpt instance:
+ddpt if=/dev/sde of=- status=progress iflag=pt bs=4096 --protect=3 | ./fix_t10pi /dev/stdin /dev/stout >(sha256sum - > somefile.sha256sum) | ddpt if=- of=/dev/sdr oflag=pt bs=4096 --protect=0,3
+
+If you are using a different sector size, you'll need to change the #define SECTOR_SIZE_DATA_ONLY to be 512.
+
+Be sure to read the entire comment at the top of the .c file.
+
+Note that you'll see a number of terms and variations that I should probably include here for searchability:
+T10PI, T10 PI, DIF, DIX, Data Integrity Field, Data Integrity Extension
