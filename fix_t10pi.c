@@ -23,13 +23,13 @@ Exercise caution when using random code you find on the internet, especially thi
 
 
 USAGE:
-usage: programname <source path with T10-PI> <destination path with T10-PI> [optonal destination path that receives ONLY user data without any T10-PI, probably a pipe to a checksum program]
+usage: fix_t10pi <source path with T10-PI> <destination path with T10-PI> [optonal destination path that receives ONLY user data without any T10-PI, probably a pipe to a checksum program]
 
 You can use /dev/stdin and /dev/stdout as paths.
 
 ddpt can be used to copy data around: `ddpt ... --protect=3` for reading data in with T10-PI information and `ddpt ... --protect=0,3` for writing data out with T10-PI information. It will write out a file with the T10-PI checksums interleaved with the data (meaning every 4096 data bytes from the disk becomes 4104 bytes in the output since it includes the checksum or 520 for 512 byte sectors). The second example can take that file with the interleaved checksums and write it back out to a disk.
 
-You can clone directly from one drive to another AND generate a checksum of the user data (checksum bytes omitted) using something like this: ddpt if=/dev/sde of=- status=progress iflag=pt bs=4096 --protect=3 | ./fix_t10pi /dev/stdin /dev/stout >(sha256sum - > somefile.sha256sum) | ddpt if=- of=/dev/sdr oflag=pt bs=4096 --protect=0,3
+You can clone directly from one drive to another AND generate a checksum of the user data (checksum bytes omitted) using something like this: ddpt if=/dev/sde of=- status=progress iflag=pt bs=4096 --protect=3 | ./fix_t10pi /dev/stdin /dev/stdout >(sha256sum - > somefile.sha256sum) | ddpt if=- of=/dev/sdr oflag=pt bs=4096 --protect=0,3
 You can also use ddpt to read and write files that contain T10-PI checksums appended to each sector, rather than directly reading or writing from disks. Note that this program has a "configurable" sector size. Change the #define SECTOR_SIZE_DATA_ONLY to 512 then recompile (if that's your sector size). I could have made that an optional program argument, but why bother? :)
 
 If you are using Type 2, you will likely need to add cdbsz=32 to each invocation of ddpt.
