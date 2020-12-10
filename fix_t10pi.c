@@ -35,6 +35,10 @@ You can also use ddpt to read and write files that contain T10-PI checksums appe
 If you are using Type 2, you will likely need to add cdbsz=32 to each invocation of ddpt.
 
 
+ACKNOWLEDGEMENTS:
+I wish to sincerely thank Doug Gilbert for his help in figuring out how to make all this happen. He was able to figure out the right method for doing all of this. It seemed simple after he explained it to me, but it certainly was not simple for me prior to that. (Doug wrote ddpt and tons of other disk-related tools and is a Linux kernel maintainer for parts of the SCSI code.)
+
+
 USEFUL REFERENCES:
 * lots of tools from the sg3_utils package (That's the Debian name for it. Not sure of RHEL, etc)
 * sg_readcap --long /dev/sg0 # or whatever device it is
