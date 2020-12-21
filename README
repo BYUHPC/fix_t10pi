@@ -9,3 +9,5 @@ Be sure to read the entire comment at the top of the .c file.
 
 Note that you'll see a number of terms and variations that I should probably include here for searchability:
 T10PI, T10 PI, DIF, DIX, Data Integrity Field, Data Integrity Extension
+
+For more information about use cases, a purely hypothetical thought exercise was posted at: http://tech.ryancox.net/2020/12/fixing-bad-t10-pi-checksums.html. Any resemblance to real life diasters is purely coincidental.
